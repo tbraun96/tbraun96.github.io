@@ -1,4 +1,7 @@
+
 # Thomas P. Braun
+
+![](tennis.jpg)
 
 2045 NW Dogwood Drive, Corvallis, OR, 97330
 
@@ -10,18 +13,25 @@ http://www.neuralgis.net/
 
 https://www.linkedin.com/in/tpbraun/
 
-# Summary
+
+## **Summary**
 
 Combined 10 years of experience with Java, C++, C# .NET, Fortran, R, Python. Experience programming neural networks and optical game-hacking automation.
 
-Proficient at ArcMap, ArcGIS PRO, QGIS, ENVI, Google Maps, AutoCAD
+Proficient at ArcMap, ArcGIS PRO, QGIS, ENVI, Google Maps, AutoCAD, Visual Studio, NetBeans, IntelliJ Software, Unity3D
 
-## Work Experience (only last 10 years)
-- Hurst Berry Farm
-- North Pacific forestry
-- Benco Caregiving
+## **Work Experience (only last 10 years)**
 
-## California Polytechnic State University (San Luis Obispo, CA)
+
+| Company/Workplace | Description | Duration |
+|:-----------------:|:-----------:|:--------:|
+Hurst Berry Farm| Manual labor, forklift operation, lifting traysm cleaning, quality control| 06/2013 -> 09/2013
+North Pacific forestry| Certified wildland firefighter| 04/2014 -> 09/2014
+Benco Caregiving| Oregon certified in-home care giver. Performed daily necessities for disabled clientele| 05/2016 -> 10/2016
+
+## **Education**
+
+### California Polytechnic State University (San Luis Obispo, CA)
 
 * Student of Physics and Mathematics
 
@@ -32,7 +42,7 @@ I enrolled in general calculus (I - IV), chemistry, physics, english, intro to l
 
 **Dean's List (3.50) Fall 2014**
 
-## Oregon State University (Corvallis, OR)
+### Oregon State University (Corvallis, OR)
 
 * Student of Geospatial Sciences and Geography, minor Psychology
 
@@ -48,7 +58,7 @@ Studying the baccalaureate core, interested in research involving geospatial psy
 
 
 
-Cal Poly URL: http://www.calpoly.edu
+[Cal Poly Website](http://www.calpoly.edu)
 
-Oregon State URL: http://www.oregonstate.edu
+[Oregon State Website](http://www.oregonstate.edu)
 
