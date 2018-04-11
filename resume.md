@@ -16,7 +16,7 @@
 
 >> ## **Summary**
 
-> Combined 10 years of experience with Java, C++, C# .NET, Fortran, R, Python. Experience programming neural networks and optical game-hacking automation.
+> Combined 10 years of experience with Java, C++, C, C# .NET, Fortran, R, Python. Experience programming neural networks and optical game-hacking automation.
 
 >Proficient at ArcMap, ArcGIS PRO, QGIS, ENVI, Google Maps, AutoCAD, Visual Studio, NetBeans, IntelliJ Software, Unity3D
 
