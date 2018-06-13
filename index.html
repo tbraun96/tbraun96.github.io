@@ -4,12 +4,12 @@
     <title>GEOG 470| Geovisual Analytics Term Project</title>
     <meta charset="utf-8" />
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3UfxNZ0ELijoSrKVWjUGyENV_2SreSfA &callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3UfxNZ0ELijoSrKVWjUGyENV_2SreSfA&callback=initMap"
             async defer></script>
 
 
     <style>
-        @import url(/scripts/Cesium/Widgets/widgets.css);
+       
 
         html, body, #map {
             width: 100%;
@@ -157,6 +157,7 @@
             // NOTE: This uses cross-domain XHR, and may not work on older browsers.
             map.data.loadGeoJson(
                 'https://tbraun96.github.io/assets/angry.geojson');
+            initMap();
         }
 
     </script>
