@@ -4,11 +4,13 @@
     <title>GEOG 470| Geovisual Analytics Term Project</title>
     <meta charset="utf-8" />
 
-    
+    <script src="/scripts/Cesium/Cesium.js">
 
+
+    </script>
 
     <style>
-       
+        @import url(/scripts/Cesium/Widgets/widgets.css);
 
         html, body, #map {
             width: 100%;
@@ -129,6 +131,7 @@
             min-height: 100%;
             z-index: -1;
         }
+    
     </style>
 
 
@@ -145,30 +148,154 @@
         </p>
     </center>
 
-    <div id="map" style="width:100%; height:100%;"></div>
-    <script>
-	var map;
-        function initMap() {
-            var mapProp= {
-    		center:new google.maps.LatLng(51.508742,-0.120850),
-    		zoom:5,
-		};
+    <div id="map"></div>
 
-	var map=new google.maps.Map(document.getElementById("map"),mapProp);
+    <script type="text/javascript">
+        Cesium.BingMapsApi.defaultKey = 'AhdrAXmUcORtqa9wNn7KWHbZtq9_ObioxSD1Or0N8JislZhIejBsCOP80nI85J8S';
 
-            // NOTE: This uses cross-domain XHR, and may not work on older browsers.
-            map.data.loadGeoJson(
-                'https://tbraun96.github.io/assets/angry.geojson');
-            
-        }
+        var viewer = new Cesium.Viewer('map', {
+            imageryProvider: Cesium.BingMapsImageryProvider({
+                url: 'https://dev.virtualearth.net',
+                key: 'AhdrAXmUcORtqa9wNn7KWHbZtq9_ObioxSD1Or0N8JislZhIejBsCOP80nI85J8S',
+                mapStyle: Cesium.BingMapsStyle.CANVAS_LIGHT
+            }),
+            baseLayerPicker: false
+        });
 
+        var angryLayer = Cesium.GeoJsonDataSource.load('/assets/angry.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var disgustLayer = Cesium.GeoJsonDataSource.load('/assets/disgust.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var fearLayer = Cesium.GeoJsonDataSource.load('/assets/fear.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var happyLayer = Cesium.GeoJsonDataSource.load('/assets/happy.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var neutralLayer = Cesium.GeoJsonDataSource.load('/assets/neutral.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var sadLayer = Cesium.GeoJsonDataSource.load('/assets/sad.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var surpriseLayer = Cesium.GeoJsonDataSource.load('/assets/surprise.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        viewer.dataSources.add(happyLayer); //default
+        angryLayer.show = false;
+        disgustLayer.show = false;
+        fearLayer.show = false;
+        happyLayer.show = true;
+        neutralLayer.show = false;
+        sadLayer.show = false;
+        surpriseLayer.show = false;
+        viewer.zoomTo(happyLayer);
     </script>
-    
 
     <center>
         <div id="toolbar">
 
+            <script>
+                //emotion_fxn definitions
 
+                function refreshBaseMap() {
+                    
+                    viewer.dataSources.remove(angryLayer);
+                    viewer.dataSources.remove(disgustLayer);
+                    viewer.dataSources.remove(fearLayer);
+                    viewer.dataSources.remove(happyLayer);
+                    viewer.dataSources.remove(neutralLayer);
+                    viewer.dataSources.remove(sadLayer);
+                    viewer.dataSources.remove(surpriseLayer);
+                    angryLayer.show = false;
+                    disgustLayer.show = false;
+                    fearLayer.show = false;
+                    happyLayer.show = false;
+                    neutralLayer.show = false;
+                    sadLayer.show = false;
+                    surpriseLayer.show = false;
+                }
+
+                function angry_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(angryLayer)
+                    angryLayer.show = true;
+                    viewer.zoomTo(angryLayer);
+                }
+
+                function disgust_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(disgustLayer)
+                    disgustLayer.show = true;
+                    viewer.zoomTo(disgustLayer);
+                }
+
+                function fear_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(fearLayer)
+                    fearLayer.show = true;
+                    viewer.zoomTo(fearLayer);
+                }
+
+                function happy_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(happyLayer)
+                    happyLayer.show = true;
+                    viewer.zoomTo(happyLayer);
+                }
+
+                function neutral_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(neutralLayer)
+                    neutralLayer.show = true;
+                    viewer.zoomTo(neutralLayer);
+                }
+
+                function sad_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(sadLayer)
+                    sadLayer.show = true;
+                    viewer.zoomTo(sadLayer);
+                }
+
+                function surprise_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(surpriseLayer)
+                    surpriseLayer.show = true;
+                    viewer.zoomTo(surpriseLayer);
+                }
+
+            </script>
 
             <button id="angry_button" onclick="angry_fxn()"></button>
 
@@ -193,13 +320,12 @@
     </center>
 
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFQ9GSUyiMzDKoEJLNJ2JSsvOEYCCcLu4&callback=initMap" async defer></script>
+
 
 
 
     <img id="beaver" src="http://communications.oregonstate.edu/sites/communications.oregonstate.edu/files/osu-primarylogo-2-compressor.jpg">
     <img id="geoviz" src="http://geoviz.ceoas.oregonstate.edu/img/brand.png" />
-
 
     <center>
         <p id="footer">
