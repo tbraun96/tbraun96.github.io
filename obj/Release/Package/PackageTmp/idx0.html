@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>GEOG 470| Geovisual Analytics Term Project</title>
+    <meta charset="utf-8" />
+
+    <script src="/scripts/Cesium/Cesium.js">
+
+
+    </script>
+
+    <style>
+        @import url(/scripts/Cesium/Widgets/widgets.css);
+
+        html, body, #map {
+            width: 100%;
+            height: 90%;
+            z-index: -100;
+            background-color: transparent;
+        }
+
+
+
+        #map {
+            margin-top: -100px;
+            border-style: double;
+            border-radius: 5px;
+            border-width: 5px;
+            border-color: darkorange;
+        }
+
+        .ol-viewport {
+            z-index: -2;
+            border-style: double;
+            border-radius: 5px;
+            border-width: 5px;
+            border-color: darkorange;
+        }
+
+
+        #footer {
+            text-align: center;
+            color: darkorange;
+            font-size: medium;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            justify-content: center;
+            margin-top: -50px;
+            padding-right: 10px;
+            padding-left: 10px;
+            z-index: 999;
+        }
+
+        #title {
+            text-align: center;
+            color: darkorange;
+            font-size: 40px;
+            padding-bottom: 50px;
+            margin-top: 0px;
+            margin-bottom: 70px;
+            max-height: 20px;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            justify-content: center;
+            border-radius: 20px;
+            padding-right: 30px;
+            padding-left: 30px;
+        }
+
+        #beaver {
+            border-style: groove;
+            border-radius: 5px;
+            border-width: 5px;
+            border-color: darkorange;
+            position: absolute;
+            max-width: 300px;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        #geoviz {
+            border-style: groove;
+            border-radius: 5px;
+            border-width: 5px;
+            border-color: darkorange;
+            position: absolute;
+            max-width: 300px;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        #toolbar {
+            display: inline-block;
+            justify-content: center;
+            margin-top: -40px;
+            white-space: nowrap;
+            border-style: groove;
+            border-radius: 5px;
+            border-width: 5px;
+            border-color: darkorange;
+            z-index: 999;
+            background: rgba(0,0,0,0.5);
+        }
+
+        button {
+            background-color: mintcream;
+            margin: 10px;
+            z-index: 999;
+        }
+
+            button:hover {
+                background-color: lightcyan;
+            }
+
+            button:active {
+                transform: scale(1.2);
+                border-style: outset border-radius: 5px;
+                border-width: 5px;
+                border-color: black;
+            }
+
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+        }
+    
+    </style>
+
+
+</head>
+<body>
+
+    <video autoplay loop id="myVideo" preload="auto">
+        <source src="/assets/video.mp4" type="video/mp4">
+    </video>
+
+    <center>
+        <p id="title">
+            Social Media Trends of Psychoemotional-Responses During Hurricane Harvey
+        </p>
+    </center>
+
+    <div id="map"></div>
+
+    <script type="text/javascript">
+        Cesium.BingMapsApi.defaultKey = 'AhdrAXmUcORtqa9wNn7KWHbZtq9_ObioxSD1Or0N8JislZhIejBsCOP80nI85J8S';
+
+        var viewer = new Cesium.Viewer('map', {
+            imageryProvider: Cesium.BingMapsImageryProvider({
+                url: 'https://dev.virtualearth.net',
+                key: 'AhdrAXmUcORtqa9wNn7KWHbZtq9_ObioxSD1Or0N8JislZhIejBsCOP80nI85J8S',
+                mapStyle: Cesium.BingMapsStyle.CANVAS_LIGHT
+            }),
+            baseLayerPicker: false
+        });
+
+        var angryLayer = Cesium.GeoJsonDataSource.load('/assets/angry.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var disgustLayer = Cesium.GeoJsonDataSource.load('/assets/disgust.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var fearLayer = Cesium.GeoJsonDataSource.load('/assets/fear.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var happyLayer = Cesium.GeoJsonDataSource.load('/assets/happy.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var neutralLayer = Cesium.GeoJsonDataSource.load('/assets/neutral.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var sadLayer = Cesium.GeoJsonDataSource.load('/assets/sad.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        var surpriseLayer = Cesium.GeoJsonDataSource.load('/assets/surprise.csv', {
+            stroke: Cesium.Color.BLACK,
+            fill: Cesium.Color.GREEN,
+            strokeWidth: 3,
+            markerSymbol: '?'
+        });
+
+        viewer.dataSources.add(happyLayer); //default
+        angryLayer.show = false;
+        disgustLayer.show = false;
+        fearLayer.show = false;
+        happyLayer.show = true;
+        neutralLayer.show = false;
+        sadLayer.show = false;
+        surpriseLayer.show = false;
+        viewer.zoomTo(happyLayer);
+    </script>
+
+    <center>
+        <div id="toolbar">
+
+            <script>
+                //emotion_fxn definitions
+
+                function refreshBaseMap() {
+                    
+                    viewer.dataSources.remove(angryLayer);
+                    viewer.dataSources.remove(disgustLayer);
+                    viewer.dataSources.remove(fearLayer);
+                    viewer.dataSources.remove(happyLayer);
+                    viewer.dataSources.remove(neutralLayer);
+                    viewer.dataSources.remove(sadLayer);
+                    viewer.dataSources.remove(surpriseLayer);
+                    angryLayer.show = false;
+                    disgustLayer.show = false;
+                    fearLayer.show = false;
+                    happyLayer.show = false;
+                    neutralLayer.show = false;
+                    sadLayer.show = false;
+                    surpriseLayer.show = false;
+                }
+
+                function angry_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(angryLayer)
+                    angryLayer.show = true;
+                    viewer.zoomTo(angryLayer);
+                }
+
+                function disgust_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(disgustLayer)
+                    disgustLayer.show = true;
+                    viewer.zoomTo(disgustLayer);
+                }
+
+                function fear_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(fearLayer)
+                    fearLayer.show = true;
+                    viewer.zoomTo(fearLayer);
+                }
+
+                function happy_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(happyLayer)
+                    happyLayer.show = true;
+                    viewer.zoomTo(happyLayer);
+                }
+
+                function neutral_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(neutralLayer)
+                    neutralLayer.show = true;
+                    viewer.zoomTo(neutralLayer);
+                }
+
+                function sad_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(sadLayer)
+                    sadLayer.show = true;
+                    viewer.zoomTo(sadLayer);
+                }
+
+                function surprise_fxn() {
+                    refreshBaseMap();
+                    viewer.dataSources.add(surpriseLayer)
+                    surpriseLayer.show = true;
+                    viewer.zoomTo(surpriseLayer);
+                }
+
+            </script>
+
+            <button id="angry_button" onclick="angry_fxn()"></button>
+
+            <button id="disgust_button" onclick="disgust_fxn()"></button>
+            <button id="fear_button" onclick="fear_fxn()"></button>
+            <button id="happy_button" onclick="happy_fxn()"></button>
+            <button id="neutral_button" onclick="neutral_fxn()"></button>
+            <button id="sad_button" onclick="sad_fxn()"></button>
+            <button id="surprise_button" onclick="surprise_fxn()"></button>
+
+            <script type="text/javascript">
+                var emotes = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise"];
+
+                for (i = 0; i < 7; i++) {
+                    var buttons = document.getElementById(emotes[i] + "_button");
+                    buttons.innerHTML = '<img src="/assets/png/' + emotes[i] + '.png" />';
+                }
+
+            </script>
+
+        </div>
+    </center>
+
+
+
+
+
+
+    <img id="beaver" src="http://communications.oregonstate.edu/sites/communications.oregonstate.edu/files/osu-primarylogo-2-compressor.jpg">
+    <img id="geoviz" src="http://geoviz.ceoas.oregonstate.edu/img/brand.png" />
+
+    <center>
+        <p id="footer">
+
+            Copyright 2018 Thomas Braun. Credits to Professor Bo Zhao and Brian Katz for the Hurricane Harvey data
+        </p>
+    </center>
+</body>
+
+</html>
