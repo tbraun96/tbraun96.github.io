@@ -158,71 +158,33 @@
             <script>
                 //emotion_fxn definitions
 
-                function refreshBaseMap() {
-                    
-                    viewer.dataSources.remove(angryLayer);
-                    viewer.dataSources.remove(disgustLayer);
-                    viewer.dataSources.remove(fearLayer);
-                    viewer.dataSources.remove(happyLayer);
-                    viewer.dataSources.remove(neutralLayer);
-                    viewer.dataSources.remove(sadLayer);
-                    viewer.dataSources.remove(surpriseLayer);
-                    angryLayer.show = false;
-                    disgustLayer.show = false;
-                    fearLayer.show = false;
-                    happyLayer.show = false;
-                    neutralLayer.show = false;
-                    sadLayer.show = false;
-                    surpriseLayer.show = false;
-                }
 
                 function angry_fxn() {
-                    refreshBaseMap();
-                    viewer.dataSources.add(angryLayer)
-                    angryLayer.show = true;
-                    viewer.zoomTo(angryLayer);
+                    window.location.href = "https://tbraun96.github.io/?lyr=angry";
                 }
 
                 function disgust_fxn() {
-                    refreshBaseMap();
-                    viewer.dataSources.add(disgustLayer)
-                    disgustLayer.show = true;
-                    viewer.zoomTo(disgustLayer);
+                    window.location.href = "https://tbraun96.github.io/?lyr=disgust";
                 }
 
                 function fear_fxn() {
-                    refreshBaseMap();
-                    viewer.dataSources.add(fearLayer)
-                    fearLayer.show = true;
-                    viewer.zoomTo(fearLayer);
+                    window.location.href = "https://tbraun96.github.io/?lyr=fear";
                 }
 
                 function happy_fxn() {
-                    refreshBaseMap();
-                    viewer.dataSources.add(happyLayer)
-                    happyLayer.show = true;
-                    viewer.zoomTo(happyLayer);
+                    window.location.href = "https://tbraun96.github.io/?lyr=happy";
                 }
 
                 function neutral_fxn() {
-                    refreshBaseMap();
-                    viewer.dataSources.add(neutralLayer)
-                    neutralLayer.show = true;
-                    viewer.zoomTo(neutralLayer);
+                    window.location.href = "https://tbraun96.github.io/?lyr=neutral";
                 }
 
                 function sad_fxn() {
-                    refreshBaseMap();
-                    viewer.dataSources.add(sadLayer)
-                    sadLayer.show = true;
-                    viewer.zoomTo(sadLayer);
+                    window.location.href = "https://tbraun96.github.io/?lyr=sad";
                 }
 
                 function surprise_fxn() {
-                    refreshBaseMap();
-                    viewer.dataSources.add(surpriseLayer)
-                    surpriseLayer.show = true;
-                    viewer.zoomTo(surpriseLayer);
+                    window.location.href = "https://tbraun96.github.io/?lyr=surprise";
                 }
 
             </script>
@@ -312,15 +274,56 @@
             markerSymbol: '?'
         });
 
-        viewer.dataSources.add(happyLayer); //default
-        angryLayer.show = false;
-        disgustLayer.show = false;
-        fearLayer.show = false;
-        happyLayer.show = true;
-        neutralLayer.show = false;
-        sadLayer.show = false;
-        surpriseLayer.show = false;
-        viewer.zoomTo(happyLayer);
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+        var layer = getUrlVars()["lyr"];
+        if (layer == "angry"){
+            viewer.dataSources.add(angryLayer);
+            viewer.zoomTo(angryLayer);
+        }
+
+        else if (layer == "disgust"){
+            viewer.dataSources.add(disgustLayer);
+            viewer.zoomTo(disgustLayer);
+        }
+
+        else if (layer == "fear"){
+            viewer.dataSources.add(fearLayer);
+            viewer.zoomTo(fearLayer);
+        }
+
+        else if (layer == "happy"){
+            viewer.dataSources.add(happyLayer);
+            viewer.zoomTo(happyLayer);
+        }
+
+        else if (layer == "neutral"){
+            viewer.dataSources.add(neutralLayer);
+            viewer.zoomTo(neutralLayer);
+        }
+
+        else if (layer == "sad"){
+            viewer.dataSources.add(sadLayer);
+            viewer.zoomTo(sadLayer);
+        }
+
+        else if (layer == "surprise"){
+            viewer.dataSources.add(surpriseLayer);
+            viewer.zoomTo(surpriseLayer);
+        }
+
+        else {
+            //default
+            viewer.dataSources.add(happyLayer);
+            viewer.zoomTo(happyLayer);
+        }
+
+
     </script>
 
 
@@ -335,7 +338,8 @@
 
     <center>
         <p id="footer">
-
+            <br>
+            <br>
             Copyright 2018 Thomas Braun. Credits to Professor Bo Zhao and Brian Katz for the Hurricane Harvey data
             <br>
             <a href="./about.html">About Project</a>
